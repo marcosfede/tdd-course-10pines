@@ -3,6 +3,8 @@ import { CartIsEmpty } from '../../exceptions'
 import { CreditCard } from './creditcard'
 import { MerchantProcessor } from './merchantProcessor'
 
+export type Ticket = { amount: number }
+
 export class Cashier {
   constructor(
     private cart: Cart,
@@ -15,8 +17,8 @@ export class Cashier {
     this.cart = cart
   }
 
-  checkout() {
+  checkout(): Ticket {
     const totalAmount = this.cart.getTotalPrice()
-    return this.mp.debit(this.creditCard, totalAmount)
+    return { amount: this.mp.debit(this.creditCard, totalAmount) }
   }
 }

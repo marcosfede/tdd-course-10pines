@@ -31,8 +31,8 @@ describe('Cashier', () => {
     cart.addBook(book)
     const cashier = new Cashier(cart, creditCard, successMP)
 
-    const amount = cashier.checkout()
-    expect(amount).toEqual(10)
+    const ticket = cashier.checkout()
+    expect(ticket.amount).toEqual(10)
   })
 
   it('throws when MP is offline', async () => {

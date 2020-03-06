@@ -24,6 +24,14 @@ export class Cart {
     return this.totalNumberOfBooks() === 0
   }
 
+  public getItems(): { [isbn: string]: number } {
+    const res = {}
+    this.book_map.forEach((quantity, isbn) => {
+      res[isbn] = quantity
+    })
+    return res
+  }
+
   public addBook(book: Book, quantity: number = 1) {
     if (!this.catalog.contains(book)) {
       throw new BookNotInCatalog('Book is not in catalog')
@@ -31,7 +39,7 @@ export class Cart {
     if (quantity <= 0) {
       throw new InvalidBookQuantity('Quantity must be positive')
     }
-    this.book_map.set(book.isbn, this.book_map.get(book.isbn) ?? 0 + quantity)
+    this.book_map.set(book.isbn, (this.book_map.get(book.isbn) ?? 0) + quantity)
   }
 
   public getTotalPrice() {

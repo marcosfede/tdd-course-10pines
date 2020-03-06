@@ -49,7 +49,8 @@ describe('Cart', () => {
   it('should calculate price correctly', async () => {
     const cart = new Cart(catalog)
     const book = new Book('123')
-    cart.addBook(book, 10)
+    cart.addBook(book, 5)
+    cart.addBook(book, 5)
     expect(cart.getTotalPrice()).toEqual(100)
   })
 })
